@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Air Pollution Data </title>
+    </head>
+    <body>
+        <h1>My Air Pollution data</h1>
+        
+        <canvas id="chart"></canvas>
+        
+        <script src="charts.min.js"></script>
+        
+        <script src="D3.min.js"></script>
+        
+        <script>
+            d3.csv('atp_wta.csv').then(makeChart);
+            
+            function makeChart(players) {
+                var playerLabels = players.map(function(d) {return d.Name});
+                var weeksData = players.map(function(d) {return d.Weeks});
+
+                var chart = new Chart('chart', {
+                    type: 'horizontalBar',
+                    data: {
+                    labels: playerLabels,
+                    datasets: [
+                        {
+                        data: weeksData
+                        }
+                    ]
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
